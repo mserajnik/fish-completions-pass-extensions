@@ -7,7 +7,7 @@ extension for the [pass][pass] password manager.
 
 ## Install
 
-The easiest way to install the completions is to use the [fisher][fisher]
+The easiest way to install the completions is to use the [Fisher][fisher]
 plugin manager:
 
 ```fish
