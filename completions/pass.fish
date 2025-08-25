@@ -45,27 +45,27 @@ if test $found_completions = true
   # pass otp [code] [--clip,-c] pass-name
   complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a code -d 'Generate an OTP code'
   complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate' -s c -l clip -d 'Copy OTP code to clipboard'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate' -a "(__fish_pass_print_entries)"
+  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[3..])) -eq 0' -a "(__fish_pass_print_entries)"
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code' -s c -l clip -d 'Copy OTP code to clipboard'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code' -a "(__fish_pass_print_entries)"
+  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
   # pass otp insert [--force,-f] [--echo,-e] [pass-name]
   complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a insert -d 'Insert a new OTP key URI'
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -s f -l force -d 'Overwrite existing password without prompting'
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -s e -l echo -d 'Echo the input'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -a "(__fish_pass_print_entries)"
+  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
   # pass otp append [--force,-f] [--echo,-e] pass-name
   complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a append -d 'Append an OTP key URI to existing password'
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -s f -l force -d 'Overwrite existing URI without prompting'
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -s e -l echo -d 'Echo the input'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -a "(__fish_pass_print_entries)"
+  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
   # pass otp uri [--clip,-c] [--qrcode,-q] pass-name
   complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a uri -d 'Display the key URI'
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -s c -l clip -d 'Copy URI to clipboard'
   complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -s q -l qrcode -d 'Display QR code'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -a "(__fish_pass_print_entries)"
+  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
   # pass otp validate uri
   complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a validate -d 'Test if URI is valid OTP key URI'
