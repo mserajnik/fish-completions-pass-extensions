@@ -1,4 +1,4 @@
-# fish-completions-pass-otp
+# fish-completions-pass-extensions
 # Copyright (C) 2025  Michael Serajnik  https://github.com/mserajnik
 # Copyright (C) 2024  Milan Oberkirch  https://github.com/zvyn
 
@@ -36,10 +36,24 @@ for path in /opt/homebrew/share/fish/vendor_completions.d/pass.fish \
   end
 end
 
-# Only add pass-otp completions if we found the original pass completions.
+function __fish_pass_extension_ln_available
+  pass ln 2>&1 | string match -q "Usage: pass ln*"
+end
+
+function __fish_pass_extension_otp_available
+  pass otp 2>&1 | string match -q "Usage: pass otp*"
+end
+
+if test $found_completions = true; and __fish_pass_extension_ln_available
+  complete -c pass -f -n '__fish_pass_needs_command' -a ln -d 'Command: create symbolic links'
+
+  # pass ln pass-name link-name
+  complete -c pass -f -n '__fish_pass_uses_command ln; and test (count (commandline -opc)) -eq 2' -a "(__fish_pass_print_entries)"
+end
+
 # The completions for the main `pass otp` command originally come from
 # https://github.com/tadfisher/pass-otp/pull/191 and were expanded upon.
-if test $found_completions = true
+if test $found_completions = true; and __fish_pass_extension_otp_available
   complete -c pass -f -n '__fish_pass_needs_command' -a otp -d 'Command: generate and manage OTP codes'
 
   # pass otp [code] [--clip,-c] pass-name
