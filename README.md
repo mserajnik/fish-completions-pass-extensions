@@ -39,15 +39,22 @@ You are welcome to help out!
 
 [Open an issue][issues] or [make a pull request][pull-requests].
 
-## License
+## Licenses
 
-[GPL-3.0-or-later](LICENSE) © Michael Serajnik, Milan Oberkirch
+- [`GPL-3.0-or-later`][license-gpl-3.0-or-later] (Code)
+- [`CC-BY-SA-4.0`][license-cc-by-sa-4.0] (Documentation)
+- [`CC0-1.0`][license-cc0-1.0] (Configurations)
+
+This project follows the [REUSE specification][reuse-spec].
 
 [fisher]: https://github.com/jorgebucaran/fisher
 [pass]: https://www.passwordstore.org
 [pass-ln]: https://github.com/radian-software/pass-ln
 [pass-otp]: https://github.com/tadfisher/pass-otp
-
 [issues]: https://github.com/mserajnik/fish-completions-pass-extensions/issues
+[license-cc-by-sa-4.0]: LICENSES/CC-BY-SA-4.0.txt
+[license-cc0-1.0]: LICENSES/CC0-1.0.txt
+[license-gpl-3.0-or-later]: LICENSES/GPL-3.0-or-later.txt
 [maintainer]: https://github.com/mserajnik
 [pull-requests]: https://github.com/mserajnik/fish-completions-pass-extensions/pulls
+[reuse-spec]: https://reuse.software/spec/
