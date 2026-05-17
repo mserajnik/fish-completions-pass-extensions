@@ -12,9 +12,9 @@ set -l found_completions false
 
 # Figure out where the pass completions are located.
 for path in /opt/homebrew/share/fish/vendor_completions.d/pass.fish \
-            /usr/share/fish/vendor_completions.d/pass.fish \
-            /usr/local/share/fish/vendor_completions.d/pass.fish \
             /opt/local/share/fish/vendor_completions.d/pass.fish \
+            /usr/local/share/fish/vendor_completions.d/pass.fish \
+            /usr/share/fish/vendor_completions.d/pass.fish \
             ~/.local/share/fish/vendor_completions.d/pass.fish
   if test -f $path
     source $path
