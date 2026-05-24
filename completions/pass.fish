@@ -12,62 +12,62 @@ set -l found_completions false
 
 # Figure out where the pass completions are located.
 for path in /opt/homebrew/share/fish/vendor_completions.d/pass.fish \
-            /opt/local/share/fish/vendor_completions.d/pass.fish \
-            /usr/local/share/fish/vendor_completions.d/pass.fish \
-            /usr/share/fish/vendor_completions.d/pass.fish \
-            ~/.local/share/fish/vendor_completions.d/pass.fish
-  if test -f $path
-    source $path
-    set found_completions true
-    break
-  end
+    /opt/local/share/fish/vendor_completions.d/pass.fish \
+    /usr/local/share/fish/vendor_completions.d/pass.fish \
+    /usr/share/fish/vendor_completions.d/pass.fish \
+    ~/.local/share/fish/vendor_completions.d/pass.fish
+    if test -f $path
+        source $path
+        set found_completions true
+        break
+    end
 end
 
 function __fish_pass_extension_ln_available
-  pass ln 2>&1 | string match -q "Usage: pass ln*"
+    pass ln 2>&1 | string match -q "Usage: pass ln*"
 end
 
 function __fish_pass_extension_otp_available
-  pass otp 2>&1 | string match -q "Usage: pass otp*"
+    pass otp 2>&1 | string match -q "Usage: pass otp*"
 end
 
 if test $found_completions = true; and __fish_pass_extension_ln_available
-  complete -c pass -f -n '__fish_pass_needs_command' -a ln -d 'Command: create symbolic links'
+    complete -c pass -f -n __fish_pass_needs_command -a ln -d 'Command: create symbolic links'
 
-  # pass ln pass-name link-name
-  complete -c pass -f -n '__fish_pass_uses_command ln; and test (count (commandline -opc)) -eq 2' -a "(__fish_pass_print_entries)"
+    # pass ln pass-name link-name
+    complete -c pass -f -n '__fish_pass_uses_command ln; and test (count (commandline -opc)) -eq 2' -a "(__fish_pass_print_entries)"
 end
 
 # The completions for the main `pass otp` command originally come from
 # https://github.com/tadfisher/pass-otp/pull/191 and were expanded upon.
 if test $found_completions = true; and __fish_pass_extension_otp_available
-  complete -c pass -f -n '__fish_pass_needs_command' -a otp -d 'Command: generate and manage OTP codes'
+    complete -c pass -f -n __fish_pass_needs_command -a otp -d 'Command: generate and manage OTP codes'
 
-  # pass otp [code] [--clip,-c] pass-name
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a code -d 'Generate an OTP code'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate' -s c -l clip -d 'Copy OTP code to clipboard'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[3..])) -eq 0' -a "(__fish_pass_print_entries)"
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code' -s c -l clip -d 'Copy OTP code to clipboard'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
+    # pass otp [code] [--clip,-c] pass-name
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a code -d 'Generate an OTP code'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate' -s c -l clip -d 'Copy OTP code to clipboard'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from insert append uri validate; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[3..])) -eq 0' -a "(__fish_pass_print_entries)"
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code' -s c -l clip -d 'Copy OTP code to clipboard'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from code; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
-  # pass otp insert [--force,-f] [--echo,-e] [pass-name]
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a insert -d 'Insert a new OTP key URI'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -s f -l force -d 'Overwrite existing password without prompting'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -s e -l echo -d 'Echo the input'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
+    # pass otp insert [--force,-f] [--echo,-e] [pass-name]
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a insert -d 'Insert a new OTP key URI'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -s f -l force -d 'Overwrite existing password without prompting'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert' -s e -l echo -d 'Echo the input'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from insert; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
-  # pass otp append [--force,-f] [--echo,-e] pass-name
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a append -d 'Append an OTP key URI to existing password'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -s f -l force -d 'Overwrite existing URI without prompting'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -s e -l echo -d 'Echo the input'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
+    # pass otp append [--force,-f] [--echo,-e] pass-name
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a append -d 'Append an OTP key URI to existing password'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -s f -l force -d 'Overwrite existing URI without prompting'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append' -s e -l echo -d 'Echo the input'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from append; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
-  # pass otp uri [--clip,-c] [--qrcode,-q] pass-name
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a uri -d 'Display the key URI'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -s c -l clip -d 'Copy URI to clipboard'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -s q -l qrcode -d 'Display QR code'
-  complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
+    # pass otp uri [--clip,-c] [--qrcode,-q] pass-name
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a uri -d 'Display the key URI'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -s c -l clip -d 'Copy URI to clipboard'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri' -s q -l qrcode -d 'Display QR code'
+    complete -c pass -f -n '__fish_pass_uses_command otp; and __fish_seen_subcommand_from uri; and not string match -q -- "-*" (commandline -ct); and test (count (string match -v -- "-*" (commandline -opc)[4..])) -eq 0' -a "(__fish_pass_print_entries)"
 
-  # pass otp validate uri
-  complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a validate -d 'Test if URI is valid OTP key URI'
+    # pass otp validate uri
+    complete -c pass -f -n '__fish_pass_uses_command otp; and not __fish_seen_subcommand_from code insert append uri validate' -a validate -d 'Test if URI is valid OTP key URI'
 end

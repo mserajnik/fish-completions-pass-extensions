@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2025-2026 Michael Serajnik <https://github.com/mserajnik>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Lint
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  fish:
+    name: fish
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install fish
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fish
+
+      - name: Check syntax
+        run: find . -type f -not -path './.git/*' -name '*.fish' -print0 | xargs -0 -I {} fish -n {}
+
+      - name: Check formatting
+        run: find . -type f -not -path './.git/*' -name '*.fish' -print0 | xargs -0 fish_indent --check
+
+  reuse:
+    name: REUSE compliance
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Run reuse lint
+        uses: fsfe/reuse-action@v6

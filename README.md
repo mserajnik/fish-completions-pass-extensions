@@ -1,5 +1,7 @@
 # fish-completions-pass-extensions
 
+[![Lint status][badge-lint-status]][badge-lint-status-url]
+
 > fish completions for pass extensions
 
 This repository contains fish completions for the following [pass][pass]
@@ -43,10 +45,12 @@ You are welcome to help out!
 
 - [`GPL-3.0-or-later`][license-gpl-3.0-or-later] (Code)
 - [`CC-BY-SA-4.0`][license-cc-by-sa-4.0] (Documentation)
-- [`CC0-1.0`][license-cc0-1.0] (Configurations)
+- [`CC0-1.0`][license-cc0-1.0] (Configuration files)
 
 This project follows the [REUSE specification][reuse-spec].
 
+[badge-lint-status]: https://github.com/mserajnik/fish-completions-pass-extensions/actions/workflows/lint.yaml/badge.svg
+[badge-lint-status-url]: https://github.com/mserajnik/fish-completions-pass-extensions/actions/workflows/lint.yaml
 [fisher]: https://github.com/jorgebucaran/fisher
 [pass]: https://www.passwordstore.org
 [pass-ln]: https://github.com/radian-software/pass-ln
