@@ -10,14 +10,14 @@
 
 set -l found_completions false
 
-# Figure out where the pass completions are located.
-for path in /opt/homebrew/share/fish/vendor_completions.d/pass.fish \
-    /opt/local/share/fish/vendor_completions.d/pass.fish \
-    /usr/local/share/fish/vendor_completions.d/pass.fish \
-    /usr/share/fish/vendor_completions.d/pass.fish \
-    ~/.local/share/fish/vendor_completions.d/pass.fish
-    if test -f $path
-        source $path
+# Figure out where the pass completions are located. fish autoloads the first
+# `pass.fish` in `$fish_complete_path`, which is this file, so the original
+# completions are the next copy along.
+set -l own_completions (status filename)
+
+for candidate in $fish_complete_path/pass.fish
+    if test $candidate != $own_completions; and test -f $candidate
+        source $candidate
         set found_completions true
         break
     end

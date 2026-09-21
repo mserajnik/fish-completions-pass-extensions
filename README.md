@@ -27,9 +27,9 @@ To manually install instead, copy
 
 Due to how completions for pass are implemented, it is currently not possible
 to cleanly add completions for extensions without sourcing the main pass
-completions. This is done with a semi-dynamic approach by checking common
-locations. If your pass completions are not in one of those locations, it will
-not work.
+completions. This is done by searching `$fish_complete_path` for the copy pass
+itself installs. If your pass completions live outside that path, it will not
+work.
 
 ## Maintainer
 
