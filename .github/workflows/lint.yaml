@@ -12,7 +12,7 @@ on:
 jobs:
   fish:
     name: fish
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -30,7 +30,7 @@ jobs:
 
   reuse:
     name: REUSE compliance
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -40,7 +40,7 @@ jobs:
 
   dprint:
     name: dprint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
