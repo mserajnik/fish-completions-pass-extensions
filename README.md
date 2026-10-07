@@ -2,8 +2,6 @@
 
 [![Lint status][badge-lint-status]][badge-lint-status-url]
 
-> fish completions for pass extensions
-
 This repository contains fish completions for the following [pass][pass]
 password manager extensions:
 
